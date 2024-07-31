@@ -21,7 +21,7 @@ do
     bytes_recv=$(cat /sys/class/net/eth0/statistics/rx_bytes)
     
     # 发送数据到服务器
-    curl -X POST -H "Content-Type: application/json" -d '{"bytes_sent":'"$bytes_sent"', "bytes_recv":'"$bytes_recv"'} $SERVER_URL
+    curl -X POST -H "Content-Type: application/json" -d "{\"bytes_sent\": $bytes_sent, \"bytes_recv\": $bytes_recv}" $SERVER_URL
     
     sleep $INTERVAL
 done
