@@ -19,9 +19,14 @@ do
     # 获取网络流量
     bytes_sent=$(cat /sys/class/net/eth0/statistics/tx_bytes)
     bytes_recv=$(cat /sys/class/net/eth0/statistics/rx_bytes)
-    
+
+    # 打印调试信息
+    echo "Bytes Sent: $bytes_sent"
+    echo "Bytes Received: $bytes_recv"
+    echo "Sending data to $SERVER_URL"
+
     # 发送数据到服务器
-    curl -X POST -H "Content-Type: application/json" -d "{\"bytes_sent\": $bytes_sent, \"bytes_recv\": $bytes_recv}" $SERVER_URL
-    
+    curl -X POST -H "Content-Type: application/json" -d "{{\"bytes_sent\": {bytes_sent}, \"bytes_recv\": {bytes_recv}}}" $SERVER_URL
+
     sleep $INTERVAL
 done
